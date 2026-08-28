@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Price it out — Subscription Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="blob" aria-hidden="true"></div>
+    <div class="eyebrow">Live estimate</div>
+    <h1>Price it out, <em>prettily</em>.</h1>
+    <p>Pick a plan, set your seats, and tune it to your team. Your ticket on the right updates as you go — nothing to submit, nothing to wait for.</p>
+  </header>
+
+  <div class="board">
+
+    <!-- CONTROLS -->
+    <div class="card">
+
+      <p class="section-label">Plan</p>
+      <div class="plans" id="plans">
+        <button class="plan-btn" data-plan="starter">
+          <span class="pname">Starter</span>
+          <span class="pprice">$19 / seat</span>
+        </button>
+        <button class="plan-btn" data-plan="team">
+          <span class="pname">Team</span>
+          <span class="pprice">$39 / seat</span>
+        </button>
+        <button class="plan-btn" data-plan="scale">
+          <span class="pname">Scale</span>
+          <span class="pprice">$79 / seat</span>
+        </button>
+      </div>
+
+      <p class="section-label">Seats</p>
+      <div class="seat-row">
+        <div class="stepper">
+          <button type="button" id="seatMinus" aria-label="Decrease seats">–</button>
+          <input type="text" id="seatInput" value="12" inputmode="numeric" aria-label="Number of seats">
+          <button type="button" id="seatPlus" aria-label="Increase seats">+</button>
+        </div>
+        <input type="range" id="seatSlider" min="1" max="200" value="12" aria-label="Seats slider">
+      </div>
+      <div class="volume-badge" id="volumeBadge">Volume discount applied</div>
+
+      <p class="section-label">Billing cycle</p>
+      <div>
+        <span class="toggle" id="cycleToggle">
+          <button type="button" class="active" data-cycle="monthly">Monthly</button>
+          <button type="button" data-cycle="annual">Annual</button>
+        </span>
+        <span class="toggle-note" id="cycleNote" style="visibility:hidden;">Save 15%</span>
+      </div>
+
+      <p class="section-label">Add-ons</p>
+      <div id="addons">
+        <div class="addon" data-addon="support" data-price="49">
+          <div class="addon-left">
+            <div class="checkbox"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#1A1305" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="addon-name">Priority support</div>
+              <div class="addon-desc">1-hour response, 24/7</div>
+            </div>
+          </div>
+          <div class="addon-price">$49/mo</div>
+        </div>
+        <div class="addon" data-addon="analytics" data-price="79">
+          <div class="addon-left">
+            <div class="checkbox"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#1A1305" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="addon-name">Advanced analytics</div>
+              <div class="addon-desc">Custom dashboards & exports</div>
+            </div>
+          </div>
+          <div class="addon-price">$79/mo</div>
+        </div>
+        <div class="addon" data-addon="sso" data-price="99">
+          <div class="addon-left">
+            <div class="checkbox"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#1A1305" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="addon-name">SSO & SCIM</div>
+              <div class="addon-desc">Enterprise identity provisioning</div>
+            </div>
+          </div>
+          <div class="addon-price">$99/mo</div>
+        </div>
+      </div>
+
+      <p class="section-label">Region (tax)</p>
+      <select id="region">
+        <option value="none">No sales tax</option>
+        <option value="us-ca">United States — California (8.5%)</option>
+        <option value="us-ny">United States — New York (8.875%)</option>
+        <option value="uk">United Kingdom — VAT (20%)</option>
+        <option value="eu">European Union — VAT (21%)</option>
+      </select>
+
+    </div>
+
+    <!-- RECEIPT -->
+    <div class="receipt-wrap">
+      <div class="receipt">
+        <div class="jag"></div>
+        <div class="receipt-inner">
+          <div class="r-title"><span>Estimate</span><span id="rStamp"></span></div>
+
+          <div class="r-line">
+            <div>
+              <div class="l-name" id="rPlanName">Team plan</div>
+              <div class="l-sub" id="rPlanSub">12 seats × $39</div>
+            </div>
+            <div class="l-amt" id="rPlanAmt">$468.00</div>
+          </div>
+
+          <div id="rAddonLines"></div>
+
+          <div class="r-line muted">
+            <div class="l-name">Subtotal</div>
+            <div class="l-amt" id="rSubtotal">$468.00</div>
+          </div>
+
+          <div class="r-line discount" id="rVolumeLine" style="display:none;">
+            <div class="l-name" id="rVolumeName">Volume discount</div>
+            <div class="l-amt" id="rVolumeAmt">–$0.00</div>
+          </div>
+
+          <div class="r-line discount" id="rAnnualLine" style="display:none;">
+            <div class="l-name">Annual billing</div>
+            <div class="l-amt" id="rAnnualAmt">–$0.00</div>
+          </div>
+
+          <div class="r-line muted">
+            <div class="l-name" id="rTaxName">Tax</div>
+            <div class="l-amt" id="rTaxAmt">$0.00</div>
+          </div>
+
+          <div class="r-total">
+            <div class="t-label">Total<br><span class="r-cycle" id="rCycleLabel">per month</span></div>
+            <div class="t-amt" id="rTotal">$468.00</div>
+          </div>
+
+          <div class="r-annual" id="rAnnualSummary" style="display:none;">
+            <span>Billed annually</span>
+            <b id="rAnnualTotal">$0.00</b>
+          </div>
+
+        </div>
+        <div class="jag bottom"></div>
+      </div>
+      <div class="r-foot">ESTIMATE ONLY · NOT AN INVOICE</div>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
