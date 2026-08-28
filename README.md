@@ -55,6 +55,19 @@ If GitHub Pages is enabled on this repo, you can try it here:
 
 ## 🧩 How the math works
 
+```
+lineSubtotal   = unitPrice × quantity
+extrasTotal    = sum of checked extras (flat fees)
+subtotal       = lineSubtotal + extrasTotal
+
+bulkDiscount   = 15% if qty ≥ 50, 10% if qty ≥ 20, 5% if qty ≥ 5, else 0%
+discountAmount = lineSubtotal × bulkDiscount
+
+taxAmount      = (subtotal − discountAmount) × regionTaxRate
+
+total          = subtotal − discountAmount + taxAmount
+```
+
 ---
 
 Made with ☕ and a bit too much love for perforated ticket edges.
