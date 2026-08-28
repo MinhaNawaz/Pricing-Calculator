@@ -1,21 +1,21 @@
 :root{
-  --bg:#0A0E0C;
-  --bg-2:#0D1210;
-  --card:#111613;
-  --card-2:#161C18;
-  --line:#232A25;
-  --line-soft:#1B211D;
-  --text:#EDF3EF;
-  --muted:#8FA69B;
-  --muted-2:#526158;
-  --sea:#2E8B57;
-  --sea-light:#5FD3A0;
-  --sea-soft:#152620;
-  --sea-deep:#1B5E3C;
-  --gradient:linear-gradient(135deg, #1B5E3C 0%, #2E8B57 50%, #5FD3A0 100%);
-  --shadow-sm:0 2px 10px -4px rgba(0,0,0,.5);
-  --shadow-md:0 16px 40px -18px rgba(0,0,0,.65);
-  --shadow-lg:0 30px 70px -24px rgba(0,0,0,.75);
+  --bg:#F3F7F1;
+  --bg-2:#EAF1EA;
+  --card:#FFFFFF;
+  --card-2:#F7FAF5;
+  --line:#D5E2D5;
+  --line-soft:#E4ECE3;
+  --text:#2F3E37;
+  --muted:#71857A;
+  --muted-2:#91A397;
+  --sea:#6FAF9B;
+  --sea-light:#9ACDB5;
+  --sea-soft:#E3F0E9;
+  --sea-deep:#4F8F7A;
+  --gradient:linear-gradient(135deg, #A8C9AE 0%, #72B39A 52%, #A7D8C2 100%);
+  --shadow-sm:0 2px 10px -4px rgba(47,62,55,.10);
+  --shadow-md:0 16px 40px -18px rgba(47,62,55,.12);
+  --shadow-lg:0 30px 70px -24px rgba(47,62,55,.16);
 }
 
 *{ box-sizing:border-box; }
@@ -23,8 +23,8 @@ html{ -webkit-font-smoothing:antialiased; }
 body{
   margin:0;
   background:
-    radial-gradient(900px 500px at 10% -10%, #10201A 0%, transparent 55%),
-    radial-gradient(800px 450px at 100% 0%, #0E1814 0%, transparent 55%),
+    radial-gradient(900px 500px at 10% -10%, #DDEDE1 0%, transparent 55%),
+    radial-gradient(800px 450px at 100% 0%, #E8F3EC 0%, transparent 55%),
     var(--bg);
   color:var(--text);
   font-family:'Inter', sans-serif;
@@ -60,7 +60,7 @@ header{ margin-bottom:52px; position:relative; }
 .eyebrow::before{
   content:''; width:7px; height:7px; border-radius:50%;
   background:var(--gradient);
-  box-shadow:0 0 12px 1px rgba(95,211,160,.6);
+  box-shadow:0 0 12px 1px rgba(111,175,155,.55);
 }
 h1{
   font-family:'Fraunces', serif;
@@ -70,7 +70,7 @@ h1{
   margin:0 0 16px;
   letter-spacing:-.01em;
   max-width:14ch;
-  color:#F3F7F4;
+  color:#294137;
 }
 h1 em{
   font-style:italic;
@@ -138,14 +138,14 @@ header p{
   font-family:inherit;
   transition:border-color .15s ease, background .15s ease, transform .1s ease, box-shadow .15s ease;
 }
-.plan-btn:hover{ border-color:#2E4438; transform:translateY(-1px); }
+.plan-btn:hover{ border-color:#8CB8A3; transform:translateY(-1px); }
 .plan-btn:active{ transform:translateY(0px); }
 .plan-btn.active{
   border-color:transparent;
   background:linear-gradient(var(--card-2), var(--card-2)) padding-box,
              var(--gradient) border-box;
   border:1.5px solid transparent;
-  box-shadow:0 0 0 1px rgba(95,211,160,.15), var(--shadow-sm);
+  box-shadow:0 0 0 1px rgba(111,175,155,.18), var(--shadow-sm);
 }
 .plan-btn .pname{ font-weight:600; font-size:15px; display:block; margin-bottom:4px; }
 .plan-btn .pprice{
@@ -204,14 +204,14 @@ input[type="range"]::-webkit-slider-thumb{
   -webkit-appearance:none;
   width:20px; height:20px;
   border-radius:50%;
-  background:#0A0E0C;
+  background:#F3F7F1;
   cursor:pointer;
   border:3px solid var(--sea-light);
   box-shadow:var(--shadow-sm);
 }
 input[type="range"]::-moz-range-thumb{
   width:20px; height:20px; border-radius:50%;
-  background:#0A0E0C; cursor:pointer;
+  background:#F3F7F1; cursor:pointer;
   border:3px solid var(--sea-light); box-shadow:var(--shadow-sm);
 }
 :focus-visible{ outline:2px solid var(--sea-light); outline-offset:2px; }
@@ -224,7 +224,7 @@ input[type="range"]::-moz-range-thumb{
   font-weight:600;
   color:var(--sea-light);
   background:var(--sea-soft);
-  border:1px solid #234636;
+  border:1px solid #B9D7C5;
   padding:6px 13px;
   border-radius:100px;
   opacity:0;
@@ -274,7 +274,7 @@ select{
   border-radius:14px;
   cursor:pointer;
   appearance:none;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9'><path d='M1 1l6 6 6-6' stroke='%235FD3A0' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9'><path d='M1 1l6 6 6-6' stroke='%2372B39A' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
   background-repeat:no-repeat;
   background-position:right 14px center;
 }
